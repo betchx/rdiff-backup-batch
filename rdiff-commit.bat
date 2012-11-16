@@ -150,6 +150,10 @@ echo #lines start with # mean comment line. they will be removed from commit log
 rem copy tamplate to text for user editing.
 copy %TEMPL% %TEXT% > nul
 
+rem show backup information (what are changed) for reference
+rdiff-backup --compare-full --include ./%EXCLUDE% --exclude-globbing-filelist ./%EXCLUDE:\=/%  ./ ./%DEST% | findstr /V /c:"metadata changed, data the same"
+
+
 rem run text editor for commit comment
 start /wait %TEXT%
 
