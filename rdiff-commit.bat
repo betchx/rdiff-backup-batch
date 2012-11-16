@@ -187,7 +187,7 @@ if not exist %EXCLUDE% echo ./_prev>>%EXCLUDE%
 
 rem start backup
 @echo on
-rdiff-backup --print-statistics --include ./%EXCLUDE% --exclude ./%TOP% --exclude-filelist ./%EXCLUDE:\=/%  ./ ./%DEST%
+rdiff-backup --print-statistics --include ./%EXCLUDE% --exclude-globbing-filelist ./%EXCLUDE:\=/%  ./ ./%DEST%
 @echo off
 
 rem show message.
