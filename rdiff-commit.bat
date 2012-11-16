@@ -72,9 +72,9 @@ rem ****************************************************************************
 echo %0 commit> commit.bat
 echo %0 exclude %%*> exclude.bat 
 findstr ./commit.bat %EXCLUDE% >nul
-if errorlevel 1 echo ./commit.bat >> %EXCLUDE%
+if errorlevel 1 echo ./commit.bat>> %EXCLUDE%
 findstr ./exclude.bat %EXCLUDE% >nul
-if errorlevel 1 echo ./exclude.bat >> %EXCLUDE%
+if errorlevel 1 echo ./exclude.bat>> %EXCLUDE%
 
 echo Setup finished.
 goto :fin
