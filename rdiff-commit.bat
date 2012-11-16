@@ -1,6 +1,10 @@
 @echo off
 
 
+rem change dir to this batch file location
+%~d0
+cd %~p0
+
 rem set local variables
 
 rem top directory of data
@@ -78,6 +82,9 @@ goto :fin
 rem ************************************************************************************************
 :exclude
 
+rem save wokring dir
+set PWD=%~dp0
+
 rem if target file is not specified, edit exclude file directory
 if "%~2"=="" goto :edit_exclude
 
@@ -89,18 +96,16 @@ rem target file is the first argument.
 shift
 
 rem reset working variables
-set PWD=%~dp0
+set WK=%PWD%
 set TGT=%~1
-
-echo %TGT%
 
 if not "%TGT:~1,1%"==":" goto :relative
 
 rem remove pwd prefix
 :loop
-set PWD=%PWD:~1%
+set WK=%WK:~1%
 set TGT=%TGT:~1%
-if not "%PWD%"=="" goto :loop
+if not "%WK%"=="" goto :loop
 
 rem check target is remain or not.
 if "%TGT%"==""  goto :next_check
