@@ -54,14 +54,14 @@ if "%1"=="exclude" goto :exclude
 
 echo Error:: unknown command: %1
 echo available commands are
-echo
+echo;
 echo   commit         : backup files with commit message.
 echo                    backup will be create in %DEST%
-echo
+echo;
 echo   exclude        : edit exclude list file.
-echo
+echo;
 echo   exclude file(s): add given files into exclude file with relative path.
-echo 
+echo;
 
 pause 
 goto :eof
