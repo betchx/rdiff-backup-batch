@@ -71,6 +71,10 @@ rem ****************************************************************************
 
 echo %0 commit> commit.bat
 echo %0 exclude %%*> exclude.bat 
+
+rem create initial exclude filelist if not present
+if not exist %EXCLUDE% echo ./_prev>>%EXCLUDE%
+
 findstr ./commit.bat %EXCLUDE% >nul
 if errorlevel 1 echo ./commit.bat>> %EXCLUDE%
 findstr ./exclude.bat %EXCLUDE% >nul
@@ -178,20 +182,12 @@ type %LATEST% >> %LOG%
 
 del %TEXT% >nul
 
+rem if exclude file does not exist, create it with nessesary setting.
+if not exist %EXCLUDE% echo ./_prev>>%EXCLUDE%
+
 rem start backup
-if exist %EXCLUDE% goto :excludefile
-
-
-echo execude rdiif-backup without exclude file
-rdiff-backup --print-statistics                     --exclude ./%TOP%                               ./ ./%DEST%
-
-goto :fin
-
-:excludefile
-echo execute rdiff-backup with exclude file
 @echo on
 rdiff-backup --print-statistics --include ./%EXCLUDE% --exclude ./%TOP% --exclude-filelist ./%EXCLUDE:\=/%  ./ ./%DEST%
-
 @echo off
 
 rem show message.
